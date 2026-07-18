@@ -1,0 +1,34 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+
+# SSH Keys
+*.pem
+*.ppk
+id_rsa
+id_ed25519
+
+# AWS
+.aws/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Ansible
+*.retry
