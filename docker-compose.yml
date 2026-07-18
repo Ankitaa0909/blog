@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  frontend:
+    image: nginx:latest
+    container_name: frontend
+    ports:
+      - "80:80"
+
+  backend:
+    image: httpd:latest
+    container_name: backend
+    ports:
+      - "8080:80"
+
+  database:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: blogdb
+
+    ports:
+      - "3306:3306"
