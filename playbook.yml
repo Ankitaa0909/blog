@@ -1,0 +1,55 @@
+---
+- hosts: app
+  become: yes
+
+  tasks:
+
+    - name: Update packages
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose-v2
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Deploy Frontend
+      shell: |
+        docker rm -f frontend || true
+        docker run -d --name frontend -p 80:80 nginx
+
+    - name: Deploy Backend
+      shell: |
+        docker rm -f backend || true
+        docker run -d --name backend -p 8080:80 httpd
+
+- hosts: db
+  become: yes
+
+  tasks:
+
+    - name: Update packages
+      apt:
+        update_cache: yes
+
+    - name: Install MySQL
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Start MySQL
+      service:
+        name: mysql
+        state: started
+        enabled: yes
